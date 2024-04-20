@@ -31,7 +31,15 @@ button{
     padding: 15px;    
 }
     </style>
-    <script>
+    
+</head>
+<body>
+    <h1>Last Joke for today!</h1>
+    <p id="joke"></p>
+    <button id="button">Make me laught!!!</button>
+</body>
+</html>
+<script>
     function makeJoke() {
     fetch("https://official-joke-api.appspot.com/random_joke")
     .then(resp =>{
@@ -61,10 +69,3 @@ button{
 
 document.getElementById("button").addEventListener("click", makeJoke)
     </script>
-</head>
-<body>
-    <h1>Last Joke for today!</h1>
-    <p id="joke"></p>
-    <button id="button">Make me laught!!!</button>
-</body>
-</html>
