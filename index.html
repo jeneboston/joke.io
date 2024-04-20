@@ -6,6 +6,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jokes</title>
+    <style>
+    body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: #36100c;
+    font-weight: bold;
+    background-color: #ecf0f1;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #006266;
+    padding: 20px;
+
+}
+button{
+    background-color: #d35400;
+    color: #000203;
+    font-size: 50px;
+    margin: 20px;
+    border-radius: 50px;
+    border: none;
+    padding: 15px;    
+}
+    </style>
+    <script>
+    function makeJoke() {
+    fetch("https://official-joke-api.appspot.com/random_joke")
+    .then(resp =>{
+        if (resp.status !== 200) {
+            throw new Error ("Error")
+        }
+        return resp.json()
+    })
+    .then( json => {
+        const jokeContainer = document.getElementById("joke")
+        jokeContainer.innerHTML = "";
+        const jokeSetup = json.setup
+        const jokePunchline = json.punchline
+        const setupElement = document.createElement("p")
+        setupElement.textContent = jokeSetup
+        jokeContainer.appendChild(setupElement)
+
+        const punchlineElement = document.createElement("p")
+        punchlineElement.textContent = jokePunchline
+        jokeContainer.appendChild(punchlineElement)
+
+    })
+    .catch(error => {
+        console.error(error)
+    })
+}
+
+document.getElementById("button").addEventListener("click", makeJoke)
+    </script>
 </head>
 <body>
     <h1>Last Joke for today!</h1>
